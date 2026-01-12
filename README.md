@@ -1,6 +1,6 @@
-# Charting Credits for restored mod: *
+# Charting Credits for restored mod:
 
-# splash/splashee/tailsfan25: *
+# splash/splashee/tailsfan25:
 ron-b
 bloodshed-b-oldest
 file-manipulation-b-old
@@ -14,7 +14,7 @@ typical-dessecration/atypical
 admin
 homicidal-lunacy
 
-# realbrongfield (me): *
+# realbrongfield (me):
 omnipresent
 recycle-bin
 
