@@ -2111,21 +2111,8 @@ class PlayState extends MusicBeatState
 				case 'trojan-virus':
 					schoolIntro(doof);
 					add(Estatic);
-					ronAnimation = new FlxSprite();
-					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron');
-					ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
-					ronAnimation.animation.play('idle');
-					ronAnimation.visible = false;
-					add(ronAnimation);
 				case 'trojan-virus-old':
 					add(Estatic);
-					ronAnimation = new FlxSprite();
-					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ronPower-transformation');
-					ronAnimation.animation.addByPrefix('idle', 'ron transformation instance', 24, false);
-					ronAnimation.offset.set(70, 250);
-					ronAnimation.animation.play('idle');
-					ronAnimation.visible = false;
-					add(ronAnimation);
 					startCountdown();
 				case 'recycle-bin':
 					add(Estatic2);
@@ -6463,6 +6450,12 @@ class PlayState extends MusicBeatState
 		
 		if (curSong == 'Trojan-Virus')
 		{
+			ronAnimation = new FlxSprite();
+			ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron');
+			ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
+			ronAnimation.animation.play('idle');
+			ronAnimation.visible = false;
+			add(ronAnimation);
 			switch (curStep) {
 				case 256:
 					FlxTween.tween(cloudsa, {alpha: 0}, 1, {ease: FlxEase.quadIn});
@@ -6502,6 +6495,16 @@ class PlayState extends MusicBeatState
 					defaultCamZoom -= 0.45;
 				case 1424:
 					defaultCamZoom -= 0.2;
+				case 1488:
+					dad.visible = false;
+					if (!members.contains(ronAnimation))
+						insert(members.indexOf(dad) + 1, ronAnimation);
+					ronAnimation.offset.set(dad.offset.x, dad.offset.y);
+					ronAnimation.x = dad.x;
+					ronAnimation.y = dad.y;
+					ronAnimation.visible = true;
+					ronAnimation.animation.play('idle', true);
+					trace(ronAnimation.animation.getByName('idle').frames.length);
 				case 1584:
 					FlxTween.tween(camGame, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
 					FlxTween.tween(camHUD, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
@@ -6523,12 +6526,6 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(camGame, {alpha: 1}, 1, {ease: FlxEase.quadInOut});
 					defaultCamZoom = 1;
 					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.4, {ease: FlxEase.expoOut,});
-				case 1708:
-					dad.visible = false;
-					ronAnimation.x = dad.x;
-					ronAnimation.y = dad.y;
-					ronAnimation.visible = true;
-					ronAnimation.animation.play('idle', true);
 			}
 			if ((curStep >= 256) && (curStep <= 640))
 				FlxG.camera.shake(0.00625, 0.1);
@@ -6542,6 +6539,13 @@ class PlayState extends MusicBeatState
 		}
 		if (curSong == 'Trojan-Virus-old')
 		{
+			ronAnimation = new FlxSprite();
+			ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ronPower-transformation');
+			ronAnimation.animation.addByPrefix('idle', 'ron transformation instance', 24, false);
+			ronAnimation.offset.set(70, 250);
+			ronAnimation.animation.play('idle');
+			ronAnimation.visible = false;
+			add(ronAnimation);
 			switch (curStep) {
 				case 384:
 					FlxTween.tween(cloudsa, {alpha: 0}, 1, {ease: FlxEase.quadIn});

@@ -2945,26 +2945,6 @@
 			},
 			{
 				"lengthInSteps": 16,
-				"typeOfSection": 0,
-				"sectionNotes": [],
-				"altAnim": false,
-				"bpm": 140,
-				"changeBPM": false,
-				"mustHitSection": true
-			},
-			{
-				"sectionNotes": [],
-				"typeOfSection": 0,
-				"lengthInSteps": 16,
-				"gfSection": false,
-				"altAnim": false,
-				"mustHitSection": true,
-				"changeBPM": false,
-				"bpm": 140
-			},
-			{
-				"gfSection": false,
-				"lengthInSteps": 16,
 				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
@@ -2974,14 +2954,11 @@
 			}
 		],
 		"player2": "bijuuron",
-		"gfVersion": "gf",
-		"events": [],
-		"player3": null,
+		"player3": "gf",
 		"song": "bijuu",
-		"validScore": true,
 		"needsVoices": true,
+		"validScore": true,
 		"sections": 0,
-		"stage": "ronNormal",
 		"bpm": 140,
 		"speed": 2.3
 	}
