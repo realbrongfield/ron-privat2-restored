@@ -32,6 +32,8 @@ omnipresent
 recycle-bin
 
 
+# OTHER CHARTS THAT WERENT CREDITED IS CHARTED BY THE OFFICIAL DEVS AND SOME CHARTS ARE MODDED BY ME (realbrongfield) TO FIX GLITCHED NOTES (glitched notes are notes that when pressed gives score and rating but still scrolls until missed) (also some of these glitched notes might still not be patched)
+
 # VS Ron V2.5 *still wip page*
 
 ![ron](https://static.wikia.nocookie.net/fridaynightfunking/images/1/1f/RonAnim.gif/revision/latest/scale-to-width-down/341?cb=20210723183443)

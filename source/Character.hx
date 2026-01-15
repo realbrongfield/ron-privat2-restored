@@ -1088,11 +1088,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'FMronB Left', 24, false);
 				animation.addByPrefix('singRIGHT', 'FMronB Right', 24, false);
 				addOffset('idle');
-				addOffset("singUP", 42, 38);
-				addOffset("singLEFT", 98, -27);
+				addOffset("singUP", 42, 138);
+				addOffset("singLEFT", 98, -7);
 				addOffset("singRIGHT", -89, -51);
-				addOffset("singDOWN", 40, -120);
-				addOffset("Ugh", 71, -40);
+				addOffset("singDOWN", 40, -180);
 			case 'ron-usb-b-old':
 				tex = Paths.getSparrowAtlas('updateron/characters/FMronB');
 				frames = tex;
@@ -1102,11 +1101,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'FMronB Left', 24, false);
 				animation.addByPrefix('singRIGHT', 'FMronB Right', 24, false);
 				addOffset('idle');
-				addOffset("singUP", 42, 38);
-				addOffset("singLEFT", 98, -27);
+				addOffset("singUP", 42, 138);
+				addOffset("singLEFT", 98, -7);
 				addOffset("singRIGHT", -89, -51);
-				addOffset("singDOWN", 40, -120);
-				addOffset("Ugh", 71, -40);
+				addOffset("singDOWN", 40, -180);
 			case 'factorytankman':
 				tex = Paths.getSparrowAtlas('ron/characters/factorytankman');
 				frames = tex;

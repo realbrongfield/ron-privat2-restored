@@ -127,6 +127,7 @@ class HealthIcon extends FlxSprite
 			animation.add('bf_Gray', [60, 61], 0, false, isPlayer);
 			animation.add('bf-g', [0, 1], 0, false, isPlayer);
 			animation.add('armand', [87, 88], 0 , false, isPlayer);
+			animation.add('neil', [87, 88], 0 , false, isPlayer);
 			animation.add('himdrip', [87, 88], 0 , false, isPlayer);
 			animation.add('gron', [42, 43], 0, false, isPlayer);
 			animation.add('bijuuron', [64, 65], 0, false, isPlayer);
@@ -138,6 +139,8 @@ class HealthIcon extends FlxSprite
 			animation.add('rondvd', [72, 73], 0, false, isPlayer);
 			animation.add('admin', [94, 94], 0, false, isPlayer);
 			animation.add('dave', [58, 59], 0, false, isPlayer);
+			animation.add('ronusb-transform', [14, 15], 0, false, isPlayer);
+			animation.add('ronusb-transform-b', [34, 35], 0, false, isPlayer);
 		}
 		else
 		{
@@ -186,7 +189,7 @@ class HealthIcon extends FlxSprite
 	private function usesIconGrid4(char:String):Bool
 	{
 		return [
-			'blue','blueSad','bf_Gray','bf-g','armand','himdrip','gron','bijuuron','napkin','cookron','bfshuttle-man-playable','weedron','shuttleron','rondvd','admin','dave'
+			'blue','ronusb-transform','ronusb-transform-b','blueSad','bf_Gray','bf-g','armand','neil','himdrip','gron','bijuuron','napkin','cookron','bfshuttle-man-playable','weedron','shuttleron','rondvd','admin','dave'
 		].indexOf(char) != -1;
 	}
 	private function usesIconGridcookbob(char:String):Bool

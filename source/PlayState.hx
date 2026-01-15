@@ -3344,6 +3344,21 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
+
+	function normalcharacterchange(character:String)
+	{
+		// Save dad position
+		var xx = dad.x;
+		var yy = dad.y;
+
+		// Replace dad
+		dad.alpha = 0;
+		remove(dad);
+		dad = new Character(xx, yy, character);
+		add(dad);
+		iconP2.animation.play(character);
+	}
+
 	function omnichange(character:String)
 	{
 		daStatic.alpha = 1;
@@ -6367,7 +6382,7 @@ class PlayState extends MusicBeatState
 		var chromeOffset:Float = (((2 - health/2)/2+0.5));
 		chromeOffset /= 350;
 
-		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-b-old') || (curSong == 'Bloodshed-b-older') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-old') || (curSong == 'Trojan-Virus-b') || (curSong == 'File-Manipulation') || (curSong == 'File Manipulation-b') || (curSong == 'not-bloodshed')) {
+		if ((curSong == 'Atelophobia') || (curSong == 'Factory-Reset') || (curSong == 'Bloodshed') || (curSong == 'Bloodshed-b') || (curSong == 'Bloodshed-b-old') || (curSong == 'Bloodshed-b-older') || (curSong == 'Bloodshed-old') || (curSong == 'BLOODSHED-TWO') || (curSong == 'Factory-Reset-b') || (curSong == 'Factory-Reset-old') || (curSong == 'Factory-Reset-older') || (curSong == 'Atelophobia-b') || (curSong == 'Trojan-Virus') || (curSong == 'Trojan-Virus-old') || (curSong == 'Trojan-Virus-b') || (curSong == 'Recycle-Bin') || (curSong == 'File-Manipulation') || (curSong == 'File Manipulation-b') || (curSong == 'not-bloodshed')) {
 			var chromeOffset:Float = (((2 - health/2)/2+0.5));
 			chromeOffset /= 350;
 			if (chromeOffset <= 0)
@@ -6383,7 +6398,7 @@ class PlayState extends MusicBeatState
 						case 'File-Manipulation':
 							setChrome(chromeOffset*FlxG.save.data.rgbintense);
 						case 'Recycle-Bin':
-							// nothing happens
+							setChrome(chromeOffset*FlxG.save.data.rgbintense);
 						default:
 							var sinus = 1;
 							if (curStep >= 538)
@@ -6426,6 +6441,26 @@ class PlayState extends MusicBeatState
 				FlxG.camera.shake(0.025, 0.1);
 				camHUD.shake(0.0055, 0.15);
 			}
+		}
+		if (curSong == 'Holy-Shit-Dave-Fnf-old')
+		{
+			switch (curStep) {
+				case 352:
+					defaultCamZoom = 1;
+				case 368:
+					defaultCamZoom = 1.2;
+				case 384:
+					FlxG.camera.flash(FlxColor.WHITE, 0.2);
+					dad.playAnim('um', false);
+				case 400:
+					defaultCamZoom = 1.5;
+				case 448:
+					defaultCamZoom = 0.9;
+					dad.playAnim('idle', false);
+			}
+			
+			if (curStep == 400)
+				dad.playAnim('err', false);
 		}
 		if (curSong == 'Holy-Shit-Dave-Fnf')
 		{
@@ -6505,6 +6540,7 @@ class PlayState extends MusicBeatState
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
 					trace(ronAnimation.animation.getByName('idle').frames.length);
+					iconP2.animation.play('ronusb-transform');
 				case 1584:
 					FlxTween.tween(camGame, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
 					FlxTween.tween(camHUD, {alpha: 0}, 1, {ease: FlxEase.quadInOut});
@@ -6559,12 +6595,13 @@ class PlayState extends MusicBeatState
 					camHUD.visible = false;
 				case 768:
 					dad.visible = false;
-					ronAnimation.x = dad.x/*-360*/;
-					ronAnimation.y = dad.y/*-430*/;
+					ronAnimation.x = dad.x - 360;
+					ronAnimation.y = dad.y - 170;
 					ronAnimation.visible = true;
 					ronAnimation.animation.play('idle', true);
 					defaultCamZoom = 1;
 					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.4, {ease: FlxEase.expoOut,});
+					iconP2.animation.play('ron-usb-old');
 				case 870:
 					camHUD.visible = true;
 			}
@@ -6665,9 +6702,39 @@ class PlayState extends MusicBeatState
 			if ((curStep >= 1312))
 				windowSpawn();
 		}
+		if (curSong.toLowerCase() == 'factory-reset')
+		{
+			switch (curStep)
+			{
+				case 383:
+					normalcharacterchange('neil');
+				case 543:
+					normalcharacterchange('factorytankman');
+				case 639:
+					normalcharacterchange('neil');
+				case 1215:
+					normalcharacterchange('dave');
+				case 1231:
+					normalcharacterchange('neil');
+				case 1262:
+					normalcharacterchange('factorytankman');
+				case 1280:
+					normalcharacterchange('dave');
+				case 1408:
+					normalcharacterchange('factorytankman');
+				case 1567:
+					normalcharacterchange('neil');
+				case 1823:
+					normalcharacterchange('dave');
+			}
+		}
 		if (curSong == 'File-Manipulation-b')
 		{
 			switch (curStep) {
+				case 512:
+					camGame.alpha = 1;
+					FlxG.camera.setFilters([ShadersHandler.MosaicShader]);
+					camHUD.setFilters([ShadersHandler.MosaicShader]);
 				case 1024:
 					PlayStateChangeables.scrollSpeed = 3.5;
 					var xx = dad.x-20;
@@ -6676,6 +6743,10 @@ class PlayState extends MusicBeatState
 					dad = new Character(xx, yy, 'ateloron-b');
 					add(dad);
 					iconP2.animation.play('ateloron-b');
+					camGame.alpha = 1;
+					FlxG.camera.setFilters([ShadersHandler.chromaticAberration]);
+					camHUD.setFilters([ShadersHandler.chromaticAberration]);
+					trace("hi");
 					}
 		}
 
