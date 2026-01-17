@@ -10,7 +10,7 @@ import flixel.tweens.FlxEase;
 
 class Caching extends MusicBeatState
 {
-    var toBeDone:Int = 169;
+    var toBeDone:Int = 173;
     var done:Int = 0;
 
     var cacheTimer:Float = 0;

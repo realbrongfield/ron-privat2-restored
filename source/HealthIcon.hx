@@ -9,7 +9,6 @@ class HealthIcon extends FlxSprite
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
-
 		if (char == 'bambi-new')
 			loadGraphic(Paths.image('iconGrid1'), true, 150, 150);
 		else if (usesIconGrid3(char))
@@ -22,6 +21,14 @@ class HealthIcon extends FlxSprite
 			loadGraphic(Paths.image('icon-bobcook'), true, 150, 150);
 		else if (usesIconGridhellcookron(char))
 			loadGraphic(Paths.image('icon-roncookassassinate'), true, 150, 150);
+		else if (usesIconGridshaggy(char))
+			loadGraphic(Paths.image('icon-shaggy'), true, 150, 150);
+		else if (usesIconGridneil(char))
+			loadGraphic(Paths.image('icon-neil'), true, 150, 150);
+		else if (usesIconGridtricky(char))
+			loadGraphic(Paths.image('icon-tricky'), true, 150, 150);
+		else if (usesIconGridcheeky(char))
+			loadGraphic(Paths.image('icon-cheeky'), true, 150, 150);
 		else
 			loadGraphic(Paths.image('iconGrid2'), true, 150, 150);
 
@@ -38,6 +45,22 @@ class HealthIcon extends FlxSprite
 		else if (usesIconGridhellcookron(char))
 		{
 			animation.add('hellcookron', [0, 1], 0, false, isPlayer);
+		}
+		else if (usesIconGridshaggy(char))
+		{
+			animation.add('shaggy', [0, 1], 0, false, isPlayer);
+		}
+		else if (usesIconGridneil(char))
+		{
+			animation.add('neil', [0, 1], 0, false, isPlayer);
+		}
+		else if (usesIconGridtricky(char))
+		{
+			animation.add('tricky', [0, 1], 0, false, isPlayer);
+		}
+		else if (usesIconGridcheeky(char))
+		{
+			animation.add('cheeky', [25, 25], 0, false, isPlayer);
 		}
 		else if (usesIconGrid3(char))
 		{
@@ -79,6 +102,7 @@ class HealthIcon extends FlxSprite
 			animation.add('hellron-pov', [54, 55], 0, false, isPlayer);
 			animation.add('ronslaught-pov', [54, 55], 0, false, isPlayer);
 			animation.add('devilron', [44, 45], 0, false, isPlayer);
+			animation.add('devilron-old', [44, 45], 0, false, isPlayer);
 			animation.add('douyhe', [48, 49], 0, false, isPlayer);
 			animation.add('hatedouyhe', [50, 51], 0, false, isPlayer);
 			animation.add('douyhe-old', [48, 49], 0, false, isPlayer);
@@ -108,7 +132,6 @@ class HealthIcon extends FlxSprite
 			animation.add('oldfactorytankman-2', [82, 83], 0, false, isPlayer);
 			animation.add('oldhellron-2', [78, 79], 0, false, isPlayer);
 			animation.add('hellron-2-old', [78, 79], 0, false, isPlayer);
-			animation.add('gf-in', [44], 0, false, isPlayer);
 			animation.add('chezburgir', [2, 3], 0, false, isPlayer);
 		}
 		else if (usesIconGridOld(char))
@@ -127,7 +150,6 @@ class HealthIcon extends FlxSprite
 			animation.add('bf_Gray', [60, 61], 0, false, isPlayer);
 			animation.add('bf-g', [0, 1], 0, false, isPlayer);
 			animation.add('armand', [87, 88], 0 , false, isPlayer);
-			animation.add('neil', [87, 88], 0 , false, isPlayer);
 			animation.add('himdrip', [87, 88], 0 , false, isPlayer);
 			animation.add('gron', [42, 43], 0, false, isPlayer);
 			animation.add('bijuuron', [64, 65], 0, false, isPlayer);
@@ -141,6 +163,7 @@ class HealthIcon extends FlxSprite
 			animation.add('dave', [58, 59], 0, false, isPlayer);
 			animation.add('ronusb-transform', [14, 15], 0, false, isPlayer);
 			animation.add('ronusb-transform-b', [34, 35], 0, false, isPlayer);
+			animation.add('meri', [85, 86], 0, false, isPlayer);
 		}
 		else
 		{
@@ -189,7 +212,7 @@ class HealthIcon extends FlxSprite
 	private function usesIconGrid4(char:String):Bool
 	{
 		return [
-			'blue','ronusb-transform','ronusb-transform-b','blueSad','bf_Gray','bf-g','armand','neil','himdrip','gron','bijuuron','napkin','cookron','bfshuttle-man-playable','weedron','shuttleron','rondvd','admin','dave'
+			'blue','ronusb-transform','ronusb-transform-b','blueSad','meri','bf_Gray','bf-g','armand','himdrip','gron','bijuuron','napkin','cookron','bfshuttle-man-playable','weedron','shuttleron','rondvd','admin','dave'
 		].indexOf(char) != -1;
 	}
 	private function usesIconGridcookbob(char:String):Bool
@@ -202,6 +225,30 @@ class HealthIcon extends FlxSprite
 	{
 		return [
 			'hellcookron'
+		].indexOf(char) != -1;
+	}
+	private function usesIconGridshaggy(char:String):Bool
+	{
+		return [
+			'shaggy'
+		].indexOf(char) != -1;
+	}
+	private function usesIconGridtricky(char:String):Bool
+	{
+		return [
+			'tricky'
+		].indexOf(char) != -1;
+	}
+	private function usesIconGridcheeky(char:String):Bool
+	{
+		return [
+			'cheeky'
+		].indexOf(char) != -1;
+	}
+	private function usesIconGridneil(char:String):Bool
+	{
+		return [
+			'neil'
 		].indexOf(char) != -1;
 	}
 }

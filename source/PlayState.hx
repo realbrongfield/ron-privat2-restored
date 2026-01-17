@@ -280,6 +280,31 @@ class PlayState extends MusicBeatState
 
 	var daStatic:FlxSprite = new FlxSprite(0, 0);
 
+	public static var preloadCharsDefault:Array<String> = [
+		"hellron-far"
+	];
+	public static var preloadCharsOmnipresent:Array<String> = [
+		"armand",
+		"himdrip",
+		"hellron",
+		"hacker",
+		"devilron-old",
+		"douyhe",
+		"bijuuron"
+	];
+	public static var preloadCharsFMB:Array<String> = [
+		"ateloron-b"
+	];
+	public static var preloadCharsFactoryReset:Array<String> = [
+		"shaggy",
+		"whitty",
+		"blue",
+		"blueSad",
+		"tricky",
+		"dave",
+		"cheeky",
+		"meri"
+	];
 	override public function create()
 	{
 		if (PlayState.storyWeek == 4)
@@ -287,20 +312,10 @@ class PlayState extends MusicBeatState
 			trace("DEBUG: Forcing week 4 to behave like week 1");
 			PlayState.storyWeek = 1;
 		}
-		var preloadChars:Array<String> = [
-			"armand",
-			"himdrip",
-			"hellron",
-			"hellron-far",
-			"hacker",
-			"devilron-old",
-			"douyhe",
-			"bijuuron"
-		];
 
 		cachedDummies = [];
 
-		for (charName in preloadChars)
+		for (charName in preloadCharsDefault)
 		{
 			var dummyChar:Character = new Character(-9999, -9999, charName);
 			dummyChar.visible = false;
@@ -846,6 +861,18 @@ class PlayState extends MusicBeatState
 				error2.updateHitbox();
 				error2.antialiasing = true;
 				add(error2);
+				Estatic = new FlxSprite().loadGraphic(Paths.image('updateron/bg/deadly'));
+				Estatic.scrollFactor.set();
+				Estatic.screenCenter();
+				Estatic.alpha = 0;
+				Estatic2 = new FlxSprite();
+				Estatic2.frames = Paths.getSparrowAtlas('updateron/bg/trojan_static');
+				Estatic2.scale.set(4,4);
+				Estatic2.animation.addByPrefix('idle', 'static instance 1', 24, true);
+				Estatic2.animation.play('idle');
+				Estatic2.scrollFactor.set();
+				Estatic2.screenCenter();
+				Estatic2.alpha = 0;
 			}
 			case 'baka':
 				{
@@ -1488,6 +1515,13 @@ class PlayState extends MusicBeatState
 		add(camFollow);
 		if (curSong.toLowerCase() == 'omnipresent')
 		{
+			for (charName in preloadCharsOmnipresent)
+			{
+				var dummyChar:Character = new Character(-9999, -9999, charName);
+				dummyChar.visible = false;
+				dummyChar.alpha = 0.0001;
+				add(dummyChar);
+			}
 			var vcr:VCRDistortionShader;
 			vcr = new VCRDistortionShader();
 			
@@ -1511,7 +1545,26 @@ class PlayState extends MusicBeatState
 
 			camHUD.setFilters([new ShaderFilter(vcr)]);
 		}
-
+		if (curSong.toLowerCase() == "factory-reset" || curSong.toLowerCase() == "factory-reset-old" || curSong.toLowerCase() == "factory-reset-older" || curSong.toLowerCase() == "factory-reset-oldest" || curSong.toLowerCase() == "factory-reset-b")
+		{
+			for (charName in preloadCharsFactoryReset)
+			{
+				var dummyChar:Character = new Character(-9999, -9999, charName);
+				dummyChar.visible = false;
+				dummyChar.alpha = 0.0001;
+				add(dummyChar);
+			}
+		}
+		if (curSong.toLowerCase() == "file-manipulation-b")
+		{
+			for (charName in preloadCharsFMB)
+			{
+				var dummyChar:Character = new Character(-9999, -9999, charName);
+				dummyChar.visible = false;
+				dummyChar.alpha = 0.0001;
+				add(dummyChar);
+			}
+		}
 		FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast (Lib.current.getChildAt(0), Main)).getFPS()));
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
@@ -2114,6 +2167,16 @@ class PlayState extends MusicBeatState
 				case 'trojan-virus-old':
 					add(Estatic);
 					startCountdown();
+				case 'factory-reset-old':
+					startCountdown();
+					add(Estatic);
+					add(Estatic2);
+					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
+				case 'factory-reset-older':
+					startCountdown();
+					add(Estatic);
+					add(Estatic2);
+					FlxTween.tween(Estatic, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 				case 'recycle-bin':
 					add(Estatic2);
 					FlxTween.tween(Estatic2, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
@@ -2125,7 +2188,7 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(Estatic2, {"scale.x":0.8,"scale.y":0.8}, 0.5, {ease: FlxEase.quadInOut, type: PINGPONG});
 					add(Estatic);
 					ronAnimation = new FlxSprite();
-					ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ateloron-Transform');
+					ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/ateloron-Transform');
 					ronAnimation.animation.addByPrefix('idle', 'transformation instance 1', 24);
 					ronAnimation.animation.play('idle');
 					ronAnimation.visible = false;
@@ -2775,9 +2838,17 @@ class PlayState extends MusicBeatState
 							skin = 'evik';
 						case 'hellron-2':
 							skin = 'bhell';
+						case 'hellron-2-old':
+							skin = 'bhell';
+						case 'ronPower-b':
+							skin = 'bhell';
 						case 'ateloron-b':
 							skin = 'bhell';
 						case 'ron-usb-b':
+							skin = 'bhell';
+						case 'ron-usb-b-old':
+							skin = 'bhell';
+						case 'factorytankman-b':
 							skin = 'bhell';
 						case 'oldhellron-2':
 							skin = 'bhell';
@@ -2790,6 +2861,8 @@ class PlayState extends MusicBeatState
 						case 'dave':
 							skin = 'NOTEold_assets';
 						case 'bambi':
+							skin = 'NOTEold_assets';
+						case 'bambi-old':
 							skin = 'NOTEold_assets';
 						case 'ronDave':
 							skin = 'NOTEold_assets';
@@ -2934,76 +3007,92 @@ class PlayState extends MusicBeatState
 						var skin = 'ronsip';
 						switch (dad.curCharacter)
 						{
-							case 'douyhe':
-								skin = 'NOTE_assets';
-							case 'hatedouyhe':
-								skin = 'NOTE_assets';
-							case 'douyhe-old':
-								skin = 'NOTE_assets';
-							case 'hatedouyhe-old':
-								skin = 'NOTE_assets';
-							case 'helldouyhe':
-								skin = 'NOTE_assets';
-							case 'hacker':
-								skin = 'ronhell';
-							case 'hellron':
-								skin = 'ronhell';
-							case 'hellron-far':
-								skin = 'ronhell';
-							case 'oldhellron':
-								skin = 'ronhell';
-							case 'devilron':
-								skin = 'ronhell';
-							case 'ateloron':
-								skin = 'ronhell';
-							case 'ron-usb':
-								skin = 'ronhell';
-							case 'oldateloron':
-								skin = 'ronhell';
-							case 'oldron-usb':
-								skin = 'ronhell';
-							case 'ron-usb-old':
-								skin = 'ronhell';
-							case 'demonron':
-								skin = 'demonsip';
-							case 'demonron-new':
-								skin = 'demonsip';
-							case 'demonron-old':
-								skin = 'demonsip';
-							case 'devilron':
-								skin = 'demonsip';
-							case 'ronb':
-								skin = 'evik';
-							case 'ronmad-b':
-								skin = 'evik';
-							case 'hellron-2':
-								skin = 'bhell';
-							case 'ateloron-b':
-								skin = 'bhell';
-							case 'ron-usb-b':
-								skin = 'bhell';
-							case 'oldronb':
-								skin = 'evik';
-							case 'oldronmad-b':
-								skin = 'evik';
-							case 'oldhellron-2':
-								skin = 'bhell';
-							case 'oldateloron-b':
-								skin = 'bhell';
-							case 'oldron-usb-b':
-								skin = 'bhell';
-							case 'ron-usb-b-old':
-								skin = 'bhell';
-							case 'dave':
-								skin = 'NOTEold_assets';
-							case 'bambi':
-								skin = 'NOTEold_assets';
-							case 'ronDave':
-								skin = 'NOTEold_assets';
-							case 'gron':
-								skin = 'gron_notes';
-							case 'armand':
-								skin = 'NOTE_assets';
+						case 'douyhe':
+							skin = 'NOTE_assets';
+						case 'hatedouyhe':
+							skin = 'NOTE_assets';
+						case 'douyhe-old':
+							skin = 'NOTE_assets';
+						case 'hatedouyhe-old':
+							skin = 'NOTE_assets';
+						case 'helldouyhe':
+							skin = 'NOTE_assets';
+						case 'hellron':
+							skin = 'ronhell';
+						case 'hellron-far':
+							skin = 'ronhell';
+						case 'oldhellron':
+							skin = 'ronhell';
+						case 'hacker':
+							skin = 'ronhell';
+						case 'ateloron':
+							skin = 'ronhell';
+						case 'ron-usb':
+							skin = 'ronhell';
+						case 'oldateloron':
+							skin = 'ronhell';
+						case 'oldron-usb':
+							skin = 'ronhell';
+						case 'ron-usb-old':
+							skin = 'ronhell';
+						case 'demonron':
+							skin = 'demonsip';
+						case 'demonron-new':
+							skin = 'demonsip';
+						case 'demonron-old':
+							skin = 'demonsip';
+						case 'gf-b':
+							skin = 'evik';
+						case 'ronb':
+							skin = 'evik';
+						case 'ronmad-b':
+							skin = 'evik';
+						case 'ronangry-b':
+							skin = 'evik';
+						case 'oldronb':
+							skin = 'evik';
+						case 'oldronmad-b':
+							skin = 'evik';
+						case 'oldronangry-b':
+							skin = 'evik';
+						case 'hellron-2':
+							skin = 'bhell';
+						case 'hellron-2-old':
+							skin = 'bhell';
+						case 'ronPower-b':
+							skin = 'bhell';
+						case 'ateloron-b':
+							skin = 'bhell';
+						case 'ron-usb-b':
+							skin = 'bhell';
+						case 'ron-usb-b-old':
+							skin = 'bhell';
+						case 'factorytankman-b':
+							skin = 'bhell';
+						case 'oldhellron-2':
+							skin = 'bhell';
+						case 'oldateloron-b':
+							skin = 'bhell';
+						case 'oldron-usb-b':
+							skin = 'bhell';
+						case 'ron-usb-b-old':
+							skin = 'bhell';
+						case 'dave':
+							skin = 'NOTEold_assets';
+						case 'bambi':
+							skin = 'NOTEold_assets';
+						case 'bambi-old':
+							skin = 'NOTEold_assets';
+						case 'ronDave':
+							skin = 'NOTEold_assets';
+						case 'blue':
+							skin = 'NOTE_assets';
+						case 'blueSad':
+							skin = 'NOTE_assets';
+						case 'gron':
+							skin = 'gron_notes';
+						case 'armand':
+							skin = 'NOTE_assets';
 						}
 						
 						if (force)
@@ -3356,7 +3445,11 @@ class PlayState extends MusicBeatState
 		remove(dad);
 		dad = new Character(xx, yy, character);
 		add(dad);
-		iconP2.animation.play(character);
+		remove(iconP2);
+		iconP2 = new HealthIcon(character, false);
+		iconP2.y = healthBar.y - (iconP2.height / 2);
+		add(iconP2);
+		iconP2.cameras = [camHUD];
 	}
 
 	function omnichange(character:String)
@@ -3372,6 +3465,11 @@ class PlayState extends MusicBeatState
 		remove(dad);
 		dad = new Character(xx, yy, character);
 		add(dad);
+		remove(iconP2);
+		iconP2 = new HealthIcon(character, false);
+		iconP2.y = healthBar.y - (iconP2.height / 2);
+		add(iconP2);
+		iconP2.cameras = [camHUD];
 
 		//
 		// CHARACTER POSITION FIXES
@@ -3383,44 +3481,36 @@ class PlayState extends MusicBeatState
 			dad.updateHitbox();
 			dad.x = -372;
 			dad.y = 42;
-			iconP2.animation.play('armand');
 
 		case 'himdrip':
 			dad.scale.set(0.7, 0.7);
 			dad.updateHitbox();
 			dad.x = -800;
 			dad.y = -60;
-			iconP2.animation.play('himdrip');
 
 		case 'hellron':
 			dad.x = 70;
 			dad.y = 410;
-			iconP2.animation.play('hellron');
 
 		case 'hellron-far':
 			dad.x = 70;
 			dad.y = 410;
-			iconP2.animation.play('hellron');
 
 		case 'hacker':
 			dad.x = -500;
 			dad.y = 225;
-			iconP2.animation.play('hacker');
 
 		case 'devilron-old':
 			dad.x = 70;
 			dad.y = 410;
-			iconP2.animation.play('devilron-old');
 
 		case 'douyhe':
 			dad.x = 70;
 			dad.y = 350;
-			iconP2.animation.play('douyhe');
 
 		case 'bijuuron':
 			dad.x = -80;
 			dad.y = 400;
-			iconP2.animation.play('bijuuron');
 
 		default:
 		}
@@ -6350,7 +6440,8 @@ class PlayState extends MusicBeatState
 				dad.alpha = 0;
 				remove(dad);
 				dad = new Character(xx, yy, 'hellron');
-				add(dad);				
+				add(dad);
+				iconP2.animation.play('hellron');
 				blackeffect.alpha = 0;
 				var blac:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 				blac.scrollFactor.set();
@@ -6369,7 +6460,8 @@ class PlayState extends MusicBeatState
 				dad.alpha = 0;
 				remove(dad);
 				dad = new Character(xx, yy, 'devilron');
-				add(dad);				
+				add(dad);
+				iconP2.animation.play('devilron');
 				blackeffect.alpha = 1;
 				var blac:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 				blac.scrollFactor.set();
@@ -6486,7 +6578,7 @@ class PlayState extends MusicBeatState
 		if (curSong == 'Trojan-Virus')
 		{
 			ronAnimation = new FlxSprite();
-			ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/Tron');
+			ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/Tron');
 			ronAnimation.animation.addByPrefix('idle', 'Tron Transform', 24, false);
 			ronAnimation.animation.play('idle');
 			ronAnimation.visible = false;
@@ -6576,7 +6668,7 @@ class PlayState extends MusicBeatState
 		if (curSong == 'Trojan-Virus-old')
 		{
 			ronAnimation = new FlxSprite();
-			ronAnimation.frames = Paths.getSparrowAtlas('updateron/characters/ronPower-transformation');
+			ronAnimation.frames = Paths.getSparrowAtlas('updateron/cachecharacters/ronPower-transformation');
 			ronAnimation.animation.addByPrefix('idle', 'ron transformation instance', 24, false);
 			ronAnimation.offset.set(70, 250);
 			ronAnimation.animation.play('idle');
@@ -6726,6 +6818,72 @@ class PlayState extends MusicBeatState
 					normalcharacterchange('neil');
 				case 1823:
 					normalcharacterchange('dave');
+			}
+		}
+		if (curSong.toLowerCase() == 'factory-reset-old')
+		{
+			switch (curStep)
+			{
+				case 784:
+					normalcharacterchange('blue');
+				case 896|898|900|902|904|906|908|1024|1026|1028|1030|1032|1034|1036|1152|1154|1156|1158|1160|1162|1164:
+					Estatic2.alpha = 1;
+				case 897|899|901|903|905|907|911|1025|1027|1029|1031|1033|1035|1039|1153|1155|1157|1159|1161|1163|1167:
+					Estatic2.alpha = 0;
+				case 910:
+					normalcharacterchange('cheeky');
+				case 1038:
+					normalcharacterchange('factorytankman-old');
+				case 1166:
+					normalcharacterchange('dave');
+				case 1296:
+					normalcharacterchange('blue');
+				case 1416:
+					normalcharacterchange('blueSad');
+				case 1423:
+					normalcharacterchange('neil');
+				case 1551:
+					normalcharacterchange('factorytankman-old');
+				case 1983:
+					normalcharacterchange('meri');
+			}
+		}
+		if (curSong.toLowerCase() == 'factory-reset-older')
+		{
+			switch (curStep)
+			{
+				case 784:
+					normalcharacterchange('whitty');
+				case 896|898|900|902|904|906|908|1024|1026|1028|1030|1032|1034|1036|1152|1154|1156|1158|1160|1162|1164:
+					Estatic2.alpha = 1;
+				case 897|899|901|903|905|907|911|1025|1027|1029|1031|1033|1035|1039|1153|1155|1157|1159|1161|1163|1167:
+					Estatic2.alpha = 0;
+				case 910:
+					normalcharacterchange('tricky');
+				case 1038:
+					normalcharacterchange('factorytankman-old');
+				case 1166:
+					normalcharacterchange('dave');
+				case 1296:
+					normalcharacterchange('whitty');
+				case 1416:
+					normalcharacterchange('blueSad');
+				case 1423:
+					normalcharacterchange('douyhe');
+				case 1551:
+					normalcharacterchange('factorytankman-old');
+				case 1983:
+					normalcharacterchange('meri');
+			}
+		}
+		if (curSong.toLowerCase() == 'factory-reset-b')
+		{
+			switch (curStep)
+			{
+				case 3647:
+					normalcharacterchange('shaggy');
+				case 3904:
+					normalcharacterchange('factorytankman-b');
 			}
 		}
 		if (curSong == 'File-Manipulation-b')
